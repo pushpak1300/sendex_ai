@@ -7,13 +7,16 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import { faker } from '@faker-js/faker';
+
 
 const form = useForm({
-    name: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
-    terms: false,
+    name: faker.person.fullName(),
+    organization: faker.company.name(),
+    email: faker.internet.email(),
+    password: 'password',
+    password_confirmation: 'password',
+    terms: true,
 });
 
 const submit = () => {
@@ -44,6 +47,20 @@ const submit = () => {
                     autocomplete="name"
                 />
                 <InputError class="mt-2" :message="form.errors.name" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="organization" value="Organization Name" />
+                <TextInput
+                    id="organization"
+                    v-model="form.organization"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                    autocomplete="organization"
+                />
+                <InputError class="mt-2" :message="form.errors.organization" />
             </div>
 
             <div class="mt-4">
