@@ -6,6 +6,15 @@ name = "pypi"
 [packages]
 langchain-groq = "*"
 langchain = "*"
+faiss-cpu = "*"
+langserve = {extras = ["all"], version = "*"}
+langchain-cli = "*"
+uvicorn = "*"
+fastapi = "*"
+pip = "*"
+install = "*"
+playwright = "*"
+html2text = "*"
 
 [dev-packages]
 

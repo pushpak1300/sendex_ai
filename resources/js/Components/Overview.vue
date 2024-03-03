@@ -42,11 +42,9 @@ const resetForm = () => {
             </CardHeader>
             <CardContent>
                 <div class="text-2xl font-bold">
-                    $45,231.89
+                    $0
                 </div>
-                <p class="text-xs text-muted-foreground">
-                    +20.1% from last month
-                </p>
+
             </CardContent>
         </Card>
         <Card>

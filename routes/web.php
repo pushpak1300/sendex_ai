@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Models\Contact;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +19,8 @@ use Inertia\Inertia;
 */
 
 
-Route::get('/', function () {
+Route::get('/', action: function () {
+//    \App\Jobs\SummariseContact::dispatch(\App\Models\Contact::find(2));
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),

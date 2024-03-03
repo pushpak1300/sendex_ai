@@ -20,6 +20,7 @@ return new class extends Migration
             $table->longText('summary')->nullable();
             $table->text('about')->nullable();
             $table->json('data')->nullable();
+            $table->boolean('status')->default(false);
             $table->foreignId('team_id')->references('id')->on('teams')->cascadeOnDelete();
             $table->timestamps();
         });

@@ -98,6 +98,8 @@ return [
 
     'fallback_locale' => 'en',
 
+    'python_app_url' => env('PYTHON_APP_URL', 'http://localhost:8000'),
+
     /*
     |--------------------------------------------------------------------------
     | Faker Locale

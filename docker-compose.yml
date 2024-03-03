@@ -98,6 +98,18 @@ services:
                 - 'http://localhost:7700/health'
             retries: 3
             timeout: 5s
+    python:
+        build:
+            context: ./python
+            dockerfile: Dockerfile
+        ports:
+            - '8010:80'
+        environment:
+            GROQ_API_KEY: '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'
+        volumes:
+            - './python:/app'
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge
