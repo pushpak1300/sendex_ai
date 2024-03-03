@@ -19,3 +19,7 @@
 4. Run command to set application key `sail artisan key:generate`
 5. Run command to migrate the database `sail artisan migrate`
 6. Run command to run the app `sail up`
+
+
+### Demo
+https://github.com/pushpak1300/sendex_ai/assets/31663512/da56c70c-a324-44ee-8ed8-9d3078dc9faa
