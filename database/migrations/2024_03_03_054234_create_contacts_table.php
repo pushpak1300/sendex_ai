@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->enum('type', ['company', 'individual']);
+            $table->string('email')->unique();
+            $table->string('phone')->unique()->nullable();
+            $table->longText('summary')->nullable();
+            $table->text('about')->nullable();
+            $table->json('data')->nullable();
+            $table->foreignId('team_id')->references('id')->on('teams')->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -1,11 +1,16 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import {usePage} from "@inertiajs/vue3";
+import {useForm, usePage} from "@inertiajs/vue3";
 import {Button} from "@/Components/shadcn/ui/button/index.js";
-import {Form, FormDescription, FormField, FormItem} from "@/Components/shadcn/ui/form/index.js";
+import {Form, FormDescription, FormField, FormItem, FormLabel} from "@/Components/shadcn/ui/form/index.js";
 import {Textarea} from "@/Components/shadcn/ui/textarea/index.js";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/Components/shadcn/ui/card/index.js";
 import InputError from "@/Components/InputError.vue";
+import {Input} from "@/Components/shadcn/ui/input/index.js";
+import {XCircleIcon} from '@heroicons/vue/16/solid'
+import {BuildingStorefrontIcon, UserIcon} from '@heroicons/vue/24/solid'
+import {cn} from "@/lib/utils.js";
+import {RadioGroup, RadioGroupItem} from "@/Components/shadcn/ui/radio-group/index.js";
 
 const page = usePage()
 
@@ -26,7 +31,9 @@ const page = usePage()
                                         Add details of your contact
                                     </CardDescription>
                                 </CardHeader>
-
+                                <CardContent>
+                                    {{page.props.contact}}
+                                </CardContent>
 
                             </Card>
                         </div>

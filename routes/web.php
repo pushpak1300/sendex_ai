@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -52,7 +53,5 @@ Route::middleware([
         return to_route('dashboard');
     })->name('teams.info.update');
 
-    Route::get('/contacts/create', function (Request $request) {
-        return Inertia::render('Contact');
-    })->name('contact.create');
+    Route::resource('contact', ContactController::class);
 });
