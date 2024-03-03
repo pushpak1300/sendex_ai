@@ -1,13 +1,11 @@
 <script setup>
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import AuthenticationCard from '@/Components/AuthenticationCard.vue';
-import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
-import Checkbox from '@/Components/Checkbox.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-
+import {Input} from "@/Components/shadcn/ui/input/index.js";
+import {Label} from "@/Components/shadcn/ui/label/index.js";
+import {Button} from "@/Components/shadcn/ui/button/index.js";
+import InputError from "@/Components/InputError.vue";
+import {Checkbox} from "@/Components/shadcn/ui/checkbox/index.js";
 defineProps({
     canResetPassword: Boolean,
     status: String,
@@ -31,38 +29,35 @@ const submit = () => {
 
 <template>
     <Head title="Log in" />
-
     <AuthenticationCard>
-        <template #logo>
-            <AuthenticationCardLogo />
-        </template>
+        <template #title>
+            Log in to your account
+            </template>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
             {{ status }}
         </div>
-
         <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="email" value="Email" />
-                <TextInput
+            <div class="grid gap-2">
+                <Label for="email">Email</Label>
+                <Input
                     id="email"
                     v-model="form.email"
+                    placeholder="example@example.com"
                     type="email"
-                    class="mt-1 block w-full"
                     required
                     autofocus
-                    autocomplete="username"
+                    autocomplete="email"
                 />
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-                <TextInput
+            <div class="grid gap-2 mt-4">
+                <Label for="password">Password</Label>
+                <Input
                     id="password"
                     v-model="form.password"
                     type="password"
-                    class="mt-1 block w-full"
                     required
                     autocomplete="current-password"
                 />
@@ -70,20 +65,18 @@ const submit = () => {
             </div>
 
             <div class="block mt-4">
-                <label class="flex items-center">
                     <Checkbox v-model:checked="form.remember" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
-                </label>
+                    <label for="remember" class="ms-2 text-sm text-gray-600 dark:text-gray-400">Remember me</label>
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                <Link v-if="canResetPassword" :href="route('password.request')" class="underline underline-offset-4 hover:text-primary mx-2">
                     Forgot your password?
                 </Link>
 
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <Button class=" " :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in
-                </PrimaryButton>
+                </Button>
             </div>
         </form>
     </AuthenticationCard>

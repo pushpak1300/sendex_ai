@@ -5,8 +5,8 @@ import ActionSection from '@/Components/ActionSection.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import InputError from '@/Components/InputError.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import {Input} from "@/Components/shadcn/ui/input/index.js";
+import {Button} from "@/Components/shadcn/ui/button/index.js";
 
 const confirmingUserDeletion = ref(false);
 const passwordInput = ref(null);
@@ -68,7 +68,7 @@ const closeModal = () => {
                     Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.
 
                     <div class="mt-4">
-                        <TextInput
+                        <Input
                             ref="passwordInput"
                             v-model="form.password"
                             type="password"
@@ -83,18 +83,18 @@ const closeModal = () => {
                 </template>
 
                 <template #footer>
-                    <SecondaryButton @click="closeModal">
+                    <Button variant="secondary" @click="closeModal">
                         Cancel
-                    </SecondaryButton>
+                    </Button>
 
-                    <DangerButton
+                    <Button variant="destructive"
                         class="ms-3"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                         @click="deleteUser"
                     >
                         Delete Account
-                    </DangerButton>
+                    </Button>
                 </template>
             </DialogModal>
         </template>

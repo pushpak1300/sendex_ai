@@ -4,15 +4,13 @@ import { router, useForm, usePage } from '@inertiajs/vue3';
 import ActionMessage from '@/Components/ActionMessage.vue';
 import ActionSection from '@/Components/ActionSection.vue';
 import ConfirmationModal from '@/Components/ConfirmationModal.vue';
-import DangerButton from '@/Components/DangerButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import FormSection from '@/Components/FormSection.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
 import SectionBorder from '@/Components/SectionBorder.vue';
-import TextInput from '@/Components/TextInput.vue';
+import {Input} from "@/Components/shadcn/ui/input/index.js";
+import {Button} from "@/Components/shadcn/ui/button/index.js";
 
 const props = defineProps({
     team: Object,
@@ -117,7 +115,7 @@ const displayableRole = (role) => {
                     <!-- Member Email -->
                     <div class="col-span-6 sm:col-span-4">
                         <InputLabel for="email" value="Email" />
-                        <TextInput
+                        <Input
                             id="email"
                             v-model="addTeamMemberForm.email"
                             type="email"
@@ -131,19 +129,19 @@ const displayableRole = (role) => {
                         <InputLabel for="roles" value="Role" />
                         <InputError :message="addTeamMemberForm.errors.role" class="mt-2" />
 
-                        <div class="relative z-0 mt-1 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer">
-                            <button
+                        <div class="relative z-0 space-y-2 rounded-lg cursor-pointer">
+                            <Button
+                                variant="outline"
+                                size="xl"
                                 v-for="(role, i) in availableRoles"
                                 :key="role.key"
-                                type="button"
-                                class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600"
-                                :class="{'border-t border-gray-200 dark:border-gray-700 focus:border-none rounded-t-none': i > 0, 'rounded-b-none': i != Object.keys(availableRoles).length - 1}"
+                                class="w-full py-2 items-start"
                                 @click="addTeamMemberForm.role = role.key"
                             >
                                 <div :class="{'opacity-50': addTeamMemberForm.role && addTeamMemberForm.role != role.key}">
                                     <!-- Role Name -->
-                                    <div class="flex items-center">
-                                        <div class="text-sm text-gray-600 dark:text-gray-400" :class="{'font-semibold': addTeamMemberForm.role == role.key}">
+                                    <div class="inline-flex">
+                                        <div class="text-sm " :class="{'font-semibold': addTeamMemberForm.role == role.key}">
                                             {{ role.name }}
                                         </div>
 
@@ -152,12 +150,11 @@ const displayableRole = (role) => {
                                         </svg>
                                     </div>
 
-                                    <!-- Role Description -->
-                                    <div class="mt-2 text-xs text-gray-600 dark:text-gray-400 text-start">
+                                    <div class="text-xs ">
                                         {{ role.description }}
                                     </div>
                                 </div>
-                            </button>
+                            </Button>
                         </div>
                     </div>
                 </template>
@@ -167,9 +164,9 @@ const displayableRole = (role) => {
                         Added.
                     </ActionMessage>
 
-                    <PrimaryButton :class="{ 'opacity-25': addTeamMemberForm.processing }" :disabled="addTeamMemberForm.processing">
+                    <Button :class="{ 'opacity-25': addTeamMemberForm.processing }" :disabled="addTeamMemberForm.processing">
                         Add
-                    </PrimaryButton>
+                    </Button>
                 </template>
             </FormSection>
         </div>
@@ -281,19 +278,16 @@ const displayableRole = (role) => {
 
             <template #content>
                 <div v-if="managingRoleFor">
-                    <div class="relative z-0 mt-1 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer">
-                        <button
+                    <div class="relative z-0 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer">
+                        <Button
                             v-for="(role, i) in availableRoles"
                             :key="role.key"
-                            type="button"
-                            class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600"
-                            :class="{'border-t border-gray-200 dark:border-gray-700 focus:border-none rounded-t-none': i > 0, 'rounded-b-none': i !== Object.keys(availableRoles).length - 1}"
                             @click="updateRoleForm.role = role.key"
                         >
                             <div :class="{'opacity-50': updateRoleForm.role && updateRoleForm.role !== role.key}">
                                 <!-- Role Name -->
                                 <div class="flex items-center">
-                                    <div class="text-sm text-gray-600 dark:text-gray-400" :class="{'font-semibold': updateRoleForm.role === role.key}">
+                                    <div class="text-sm" :class="{'font-semibold': updateRoleForm.role === role.key}">
                                         {{ role.name }}
                                     </div>
 
@@ -307,24 +301,24 @@ const displayableRole = (role) => {
                                     {{ role.description }}
                                 </div>
                             </div>
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </template>
 
             <template #footer>
-                <SecondaryButton @click="currentlyManagingRole = false">
+                <Button variant="secondary" @click="currentlyManagingRole = false">
                     Cancel
-                </SecondaryButton>
+                </Button>
 
-                <PrimaryButton
+                <button
                     class="ms-3"
                     :class="{ 'opacity-25': updateRoleForm.processing }"
                     :disabled="updateRoleForm.processing"
                     @click="updateRole"
                 >
                     Save
-                </PrimaryButton>
+                </button>
             </template>
         </DialogModal>
 
@@ -339,18 +333,18 @@ const displayableRole = (role) => {
             </template>
 
             <template #footer>
-                <SecondaryButton @click="confirmingLeavingTeam = false">
+                <Button variant="secondary" @click="confirmingLeavingTeam = false">
                     Cancel
-                </SecondaryButton>
+                </Button>
 
-                <DangerButton
+                <Button variant="destructive"
                     class="ms-3"
                     :class="{ 'opacity-25': leaveTeamForm.processing }"
                     :disabled="leaveTeamForm.processing"
                     @click="leaveTeam"
                 >
                     Leave
-                </DangerButton>
+                </Button>
             </template>
         </ConfirmationModal>
 
@@ -365,18 +359,18 @@ const displayableRole = (role) => {
             </template>
 
             <template #footer>
-                <SecondaryButton @click="teamMemberBeingRemoved = null">
+                <Button variant="secondary" @click="teamMemberBeingRemoved = null">
                     Cancel
-                </SecondaryButton>
+                </Button>
 
-                <DangerButton
+                <Button variant="destructive"
                     class="ms-3"
                     :class="{ 'opacity-25': removeTeamMemberForm.processing }"
                     :disabled="removeTeamMemberForm.processing"
                     @click="removeTeamMember"
                 >
                     Remove
-                </DangerButton>
+                </Button>
             </template>
         </ConfirmationModal>
     </div>

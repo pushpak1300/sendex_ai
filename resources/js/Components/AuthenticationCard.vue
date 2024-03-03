@@ -1,11 +1,27 @@
-<template>
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-        <div>
-            <slot name="logo" />
-        </div>
+<script setup>
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/Components/shadcn/ui/card/index.js";
+import AuthenticationCardLogo from "@/Components/AuthenticationCardLogo.vue";
+import { useDark } from '@vueuse/core'
 
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-            <slot />
-        </div>
+useDark()
+</script>
+
+<template>
+    <div class="w-screen h-screen flex items-center justify-center">
+        <Card class="w-[500px]">
+            <CardHeader class="space-y-1">
+                <AuthenticationCardLogo  />
+                <CardTitle class="text-xl">
+                    <slot name="title"></slot>
+                </CardTitle>
+                <CardDescription>
+                    <slot name="subtiltle"></slot>
+                </CardDescription>
+            </CardHeader>
+            <CardContent class="grid">
+                <slot></slot>
+            </CardContent>
+        </Card>
     </div>
 </template>
+

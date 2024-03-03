@@ -9,7 +9,7 @@ use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\Team as JetstreamTeam;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $user_id
@@ -54,6 +54,7 @@ class Team extends JetstreamTeam
      */
     protected $fillable = [
         'name',
+        'info',
         'personal_team',
     ];
 

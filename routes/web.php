@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,6 +15,7 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -30,6 +32,27 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard',[
+            'info' => auth()->user()->currentTeam?->info
+        ]);
     })->name('dashboard');
+
+    Route::post('/info', function (Request $request) {
+        $user = auth()->user();
+        $team = $user->currentTeam;
+        $team->update($request->validate(['info' => 'required|string']));
+        return to_route('dashboard');
+    })->name('teams.info.store');
+
+    Route::put('/info', function (Request $request) {
+        $user = auth()->user();
+        $team = $user->currentTeam;
+        $team->update($request->validate(['info' => 'required|string']));
+        session()->flash('message', 'Team info added.');
+        return to_route('dashboard');
+    })->name('teams.info.update');
+
+    Route::get('/contacts/create', function (Request $request) {
+        return Inertia::render('Contact');
+    })->name('contact.create');
 });

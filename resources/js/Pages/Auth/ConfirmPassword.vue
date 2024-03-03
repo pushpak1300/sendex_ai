@@ -5,8 +5,8 @@ import AuthenticationCard from '@/Components/AuthenticationCard.vue';
 import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import {Input} from "@/Components/shadcn/ui/input/index.js";
+import {Button} from "@/Components/shadcn/ui/button/index.js";
 
 const form = useForm({
     password: '',
@@ -29,18 +29,18 @@ const submit = () => {
     <Head title="Secure Area" />
 
     <AuthenticationCard>
-        <template #logo>
-            <AuthenticationCardLogo />
+        <template #title>
+            Confirm Password
         </template>
 
-        <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+        <template #subtiltle>
             This is a secure area of the application. Please confirm your password before continuing.
-        </div>
+        </template>
 
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="password" value="Password" />
-                <TextInput
+                <Input
                     id="password"
                     ref="passwordInput"
                     v-model="form.password"
@@ -54,9 +54,9 @@ const submit = () => {
             </div>
 
             <div class="flex justify-end mt-4">
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <Button class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Confirm
-                </PrimaryButton>
+                </Button>
             </div>
         </form>
     </AuthenticationCard>
