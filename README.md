@@ -12,7 +12,7 @@
    docker run --rm \
     -v $(pwd):/opt \
     -w /opt \
-    laravelsail/php80-composer:latest \
+    laravelsail/php83-composer:latest \
     composer install
    ```
 3. Make sure no process is running on 8000,8001,8002 port and Run the command to run the containers<br>`./vendor/bin/sail up`
