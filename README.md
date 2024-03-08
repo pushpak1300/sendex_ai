@@ -15,7 +15,7 @@
     laravelsail/php83-composer:latest \
     composer install
    ```
-3. Make sure no process is running on 8000,8001,8002 port and Run the command to run the containers<br>`./vendor/bin/sail up`
+3. Run the command to run the containers`./vendor/bin/sail up`
 4. Run command to set application key `sail artisan key:generate`
 5. Run command to migrate the database `sail artisan migrate`
 6. Run command to run the app `sail up`
